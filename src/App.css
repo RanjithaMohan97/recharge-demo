@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.showPlans{
+  display: flex;
+  flex-direction: row;
+ 
+}
+.content{
+  display: inline-flex;
+  flex-direction: row;
+  width:80%;
+}
+
