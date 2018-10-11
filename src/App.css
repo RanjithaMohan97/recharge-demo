@@ -1,15 +1,23 @@
 .App {
   text-align: center;
 }
-
-.showPlans{
-  display: flex;
-  flex-direction: row;
- 
-}
-.content{
-  display: inline-flex;
-  flex-direction: row;
-  width:80%;
+.planPackage
+{
+  display:block;
+  padding:5px;
+  font-size: 2px;
 }
 
+.showPlans
+{
+  
+  display:inline-flex;
+  flex-direction: row;
+  width: 300px;
+  height: 100px;
+}
+
+.content
+{font-size: 1em;
+  width: 60%;
+}

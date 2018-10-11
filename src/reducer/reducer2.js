@@ -1,14 +1,19 @@
 import {rechargeStore} from '../rechargeStore.js'
-export const reducer2 = (state=rechargeStore,action) =>{
+ const reducer2 = (state = rechargeStore.debit,action) =>{
+
     switch(action.type){
-        case "myplan":
+      
+        case "transaction":
         {
+            console.log(action.payload)
             return{
-            plans:state.plans,
-            choosenPlan:action.payload
+            //plans:state.plans,
+            //choosenPlan:state.choosenPlan,
+            debit:action.payload
             }
         }
         default:
         return state;
     }
 }
+export default reducer2;

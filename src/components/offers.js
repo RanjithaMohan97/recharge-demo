@@ -1,79 +1,89 @@
 import React, { Component } from 'react';
 import {Checkout} from './Checkout.js';
 import Button from '@material-ui/core/Button';
-
-import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { Typography } from '@material-ui/core';
 import {decidingPlan} from '../actions/action.js'
 import Card from '@material-ui/core/Card';
-
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import {Route,Link } from 'react-router-dom'
+import Checkbox from '@material-ui/core/Checkbox';
+//import {app1} from './App.js';
+import { Redirect, Route,Switch,Link,withRouter } from 'react-router-dom'
 
-
-
-/*const mapStateToProps=(state)=>{
-    return {primaryPlan:state}
+const mapStateToProps=(state)=>{
+    return {primaryPlan:state.reducer1}
   }
   const mapDispatchToProps=(dispatch)=>{
   return {
-      confirmPlan : (payload) => dispatch(decidingPlan(payload))
-    }
-  }*/
+    confirmPlan : (payload) => dispatch(decidingPlan(payload))
+  }
+  }
 
-export class Offers extends Component {
+ class Offers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           checkout:false
+           selectedPlan:null
         }
-        this.handle = this.handle.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this)
     }
 
 
-    handle(booster)
+    handleChange(booster,i)
     {
-        this.setState({checkout:true});
-       this.props.confirmPlan(booster)
+     this.setState({selectedPlan:i});
+       this.props.confirmPlan(booster);
+       //this.props.onReverse;
     }
-
+    handleClick()
+    {
+     //this.setState({selectedPlan:i});
+       //this.props.confirmPlan(booster);
+       this.props.history.push("/");
+    }
 
     render(){
-
-        console.log(this.props);
-        //console.log("hiiii")
+        console.log("hiiii");
+        console.log(this.props.primaryPlan);
         return( 
-            <div>
-                
+
+            <div className="App">
             {
-            this.props.plan.plans[0].plans.map(booster=>{
+           this.props.primaryPlan.plans.map((booster,i)=>{
               return(
-             <div>
+             <div className = "planPackage">
                <Card className = "showPlans">
-                   <CardContent  className = "content">
-                       
+                   <CardContent >
                         <Typography variant="headline"  className = "content">{booster.planName}</Typography>
                         <Typography component="p"  className = "content">{booster.validity}</Typography>
                     </CardContent>
                     <CardActions>
-                    <Button size="small" color="primary" variant = "text" onClick = {e=>this.handle(booster)}>
+                    <Checkbox
+                            checked={this.state.selectedPlan===i&&true}
+                            onChange={e=>this.handleChange(booster,i)}
+                            value={i}
+                            
+                    />
+                    {/*<Button size="small" color="primary" variant = "text" onClick = {e=>this.handle(booster)}>
                         Select
-                    </Button>
+                        </Button>*/}
                     </CardActions>
                     </Card>
                 <br/><br/>
-                
-                {/*this.state.checkout&&
-                <Route exact path ='/checkout' render={()=>
-                (<Checkout/>)}
-                />
-                */}
-            </div>)}
-            )}
-            {this.state.checkout&&<Checkout/>}
-            </div>
+                 
+            </div>)
+              })
+            }
+            <Button size="small" color="primary" variant = "text" onClick = {this.handleClick}>
+            GoBack
+           </Button>
+           <Button size="small" color="primary" variant = "text" >
+            <Link to ="/checkout">Checkout</Link>
+            </Button>
+           </div>
         )
     }
 }
-//export default connect(mapStateToProps,mapDispatchToProps)(Offers);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Offers));
