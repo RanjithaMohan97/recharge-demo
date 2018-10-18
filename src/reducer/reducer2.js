@@ -1,5 +1,5 @@
 import {rechargeStore} from '../rechargeStore.js'
- const reducer2 = (state = rechargeStore.debit,action) =>{
+ const reducer2 = (state = rechargeStore.cardDetails,action) =>{
 
     switch(action.type){
       
@@ -9,7 +9,7 @@ import {rechargeStore} from '../rechargeStore.js'
             return{
             //plans:state.plans,
             //choosenPlan:state.choosenPlan,
-            debit:action.payload
+            cardDetails:action.payload
             }
         }
         default:

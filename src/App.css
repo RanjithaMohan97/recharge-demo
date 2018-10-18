@@ -1,23 +1,47 @@
 .App {
   text-align: center;
+  font-family : 'Segoe UI', Tahoma, Verdana, sans-serif;
 }
 .planPackage
 {
-  display:block;
-  padding:5px;
-  font-size: 2px;
-}
-
-.showPlans
-{
+  display:inline-grid;
+  padding:10px;
   
-  display:inline-flex;
-  flex-direction: row;
+}
+.cardDesign
+{
+  background-color:blue;
+}
+.content
+{
+  font-size: 1em;
+}
+.recharge_head
+{
+  background-color: aqua;
+  padding:10px;
+}
+.checkout{
+ position: relative;
+ display: inline-block;
+ 
+ border-radius: 25px;
+ border: 1px solid black;
+ padding:35px;
+}
+.pay{
+  margin: auto;
+  height: 200px;
   width: 300px;
-  height: 100px;
+  padding: 25px;
 }
 
-.content
-{font-size: 1em;
-  width: 60%;
+/* 
+margin-left: 30em;
+  margin-right: 30em;
+  .align{
+  text-align: center;
+  margin-left:40%;
 }
+
+*/

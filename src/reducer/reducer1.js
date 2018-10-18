@@ -15,12 +15,15 @@ import { rechargeStore } from '../rechargeStore';
         
         });
        
-        return {plans:choosen[0].plans,
+        return {
+            mobileNo:action.num,
+            plans:choosen[0].plans,
             choosenPlan:state.choosenPlan}
         }
         case "myplan":
         {
             return{
+            mobileNo:state.mobileNo,
             plans:state.plans,
             choosenPlan:action.payload
             }

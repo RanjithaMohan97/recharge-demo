@@ -1,6 +1,7 @@
 export const rechargeStore = {
+    mobileNo:"",
     plans:{},
     choosenPlan:{},
-    debit:{}
+    cardDetails:{}
 
 }

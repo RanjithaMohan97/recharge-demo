@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Dialog, Typography } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import {paymentMode} from '../actions/action.js'
 import { connect } from 'react-redux';
-import { Redirect, Route,Switch,Link ,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import CheckoutOptions from './CheckoutOptions.js';
 
 const mapStateToProps=(state)=>{
@@ -15,7 +9,7 @@ const mapStateToProps=(state)=>{
   }
   const mapDispatchToProps=(dispatch)=>{
   return {
-    MakePayment : (payload) =>{console.log(payload); dispatch(paymentMode(payload))}
+    paymentDetails : (payload) =>{console.log(payload); dispatch(paymentMode(payload))}
   }
   }
 
@@ -45,7 +39,7 @@ const mapStateToProps=(state)=>{
 
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleDetails = this.handleDetails.bind(this);
+        this.handleDebitDetails = this.handleDebitDetails.bind(this);
         this.handleCreditDetails = this.handleCreditDetails.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleBackwardClick = this.handleBackwardClick.bind(this);
@@ -56,17 +50,12 @@ const mapStateToProps=(state)=>{
     handleChange(event){
         this.setState({cardType:event.target.value});
     }
-    handleDetails(event){
+    handleDebitDetails(event){
         switch(event.target.id){
         
                 case "cardNumber":{
-                this.setState({
-                    debit:
-                    { ...this.state.debit,
-                    cardNumber:event.target.value
-                    }
-                    });
-                    break;
+                    this.setState({ debit:{ ...this.state.debit,  cardNumber:event.target.value } });
+                break;
                 }
                 case "cardHolderName":{
                     this.setState({debit:{ ...this.state.debit,cardHolderName:event.target.value}});  
@@ -119,22 +108,21 @@ const mapStateToProps=(state)=>{
         console.log(this.state);
         if(this.state.cardType==='debit')
         {
-        this.props.MakePayment(this.state.debit);
+        this.props.paymentDetails(this.state.debit);
         }
         else{
-        this.props.MakePayment(this.state.credit);
+        this.props.paymentDetails(this.state.credit);
         }
         
     }
     handleBackwardClick(){
-        this.props.history.push("/plans");
+        this.props.history.push("/plans",this.props.primier.choosenPlan);
     }
     render(){
-        //console.log(this.props.premier);
         return(
         <CheckoutOptions {... this.state}
         handleChange={  this.handleChange}
-        handleDetails = {this.handleDetails}
+        handleDebitDetails = {this.handleDebitDetails}
         handleCreditDetails = {this.handleCreditDetails}
         handleClick = {this.handleClick}
         handleBackwardClick = {this.handleBackwardClick}
